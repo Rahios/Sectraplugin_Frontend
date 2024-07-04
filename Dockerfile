@@ -12,6 +12,9 @@ RUN apt-get update && \
     adduser --uid ${USER_ID} --gid ${GROUP_ID} --disabled-password --gecos "Default user" user && \
     echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
+# Configurer Git pour autoriser le répertoire Flutter SDK
+RUN git config --global --add safe.directory /sdks/flutter
+
 # Passer à l'utilisateur non-root
 USER user
 
