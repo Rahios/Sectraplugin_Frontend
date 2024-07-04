@@ -16,10 +16,14 @@ FROM nginx:stable-alpine
 # Copier les fichiers construits vers le répertoire de nginx
 COPY --from=build /app/build/web /usr/share/nginx/html
 
+# Générer des certificats SSL auto-signés dans le conteneur
+RUN apk add openssl && \
+    mkdir -p /etc/ssl/private && \
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/cert.key -out /etc/ssl/certs/cert.crt -subj "/CN=localhost"
+
+
 # Copier les fichiers de configuration nginx
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY ssl/cert.crt /etc/ssl/certs/
-COPY ssl/cert.key /etc/ssl/private/
 
 # Exposer les ports 80 et 443 pour HTTP et HTTPS
 EXPOSE 80
