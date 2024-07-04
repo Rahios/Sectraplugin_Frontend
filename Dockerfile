@@ -12,6 +12,9 @@ RUN apt-get update && \
     adduser --uid ${USER_ID} --gid ${GROUP_ID} --disabled-password --gecos "Default user" user && \
     echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
+# Changer les permissions du répertoire Flutter SDK
+RUN chown -R user:user /sdks/flutter
+
 # Passer à l'utilisateur non-root
 USER user
 
@@ -24,6 +27,9 @@ WORKDIR /home/user/app
 # Copier les fichiers du projet dans le répertoire de travail du conteneur
 COPY --chown=user:user . .
 
+# Vérifier les permissions des fichiers
+RUN ls -l /sdks/flutter/bin/cache
+
 # Exécuter la construction de l'application Flutter pour le web
 RUN flutter build web
 
@@ -31,7 +37,7 @@ RUN flutter build web
 FROM nginx:stable-alpine
 
 # Copier les fichiers construits à partir de l'étape de build vers le répertoire par défaut de nginx
-COPY --from=build /app/build/web /usr/share/nginx/html
+COPY --from=build /home/user/app/build/web /usr/share/nginx/html
 
 # Générer des certificats SSL auto-signés dans le conteneur
 RUN apk add openssl && \
