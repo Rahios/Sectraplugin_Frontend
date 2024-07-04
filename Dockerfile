@@ -1,5 +1,5 @@
 # Utiliser l'image officielle Flutter 3.22
-FROM ghcr.io/cirruslabs/flutter:3.22.2
+FROM ghcr.io/cirruslabs/flutter:3.22.2 AS build
 
 # Définir le répertoire de travail
 WORKDIR /app
