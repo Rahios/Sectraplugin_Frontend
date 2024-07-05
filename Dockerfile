@@ -5,7 +5,7 @@ FROM ghcr.io/cirruslabs/flutter:3.22.2 AS build
 ARG USER_ID
 ARG GROUP_ID
 
-# Créer un utilisateur non-root avec les mêmes UID et GID que l'utilisateur hôte
+# Installer sudo et créer un utilisateur non-root avec sudo sans mot de passe
 RUN apt-get update && \
     apt-get install -y sudo && \
     addgroup --gid ${GROUP_ID} user && \
@@ -13,7 +13,9 @@ RUN apt-get update && \
     echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # Changer les permissions du répertoire Flutter SDK
-RUN chown -R user:user /sdks/flutter
+#RUN chown -R user:user /sdks/flutter
+RUN chown -R ${USER_ID}:${GROUP_ID} /sdks/flutter
+
 
 # Passer à l'utilisateur non-root
 USER user
@@ -27,11 +29,22 @@ WORKDIR /home/user/app
 # Copier les fichiers du projet dans le répertoire de travail du conteneur
 COPY --chown=user:user . .
 
-# Vérifier les permissions des fichiers
-RUN ls -l /sdks/flutter/bin/cache
+# Vérifier les permissions et la structure des fichiers
+RUN ls -l /home/user/app
+RUN ls -l /home/user/app/lib
+RUN cat /home/user/app/pubspec.yaml
+
+# Installer les dépendances Flutter
+RUN flutter pub get
+
+# Analyser le code pour détecter les erreurs et avertissements potentiels
+#RUN flutter analyze
+
+# Exécuter les tests unitaires (optionnel, mais recommandé)
+#RUN flutter test
 
 # Exécuter la construction de l'application Flutter pour le web
-RUN flutter build web
+RUN timeout 3600s flutter build web 2>&1
 
 # Utiliser une image nginx pour servir les fichiers web construits
 FROM nginx:stable-alpine
