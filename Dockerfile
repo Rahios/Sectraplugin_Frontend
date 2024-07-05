@@ -1,3 +1,18 @@
+# Dockerfile pour la construction et le déploiement d'une application Flutter pour le web
+
+# Étapes en résumé :
+# 1. Utiliser une image Flutter officielle pour la phase de build.
+# 2. Créer un utilisateur non-root avec sudo sans mot de passe pour des raisons de sécurité et ajuster les permissions du SDK Flutter.
+# 3. Configurer Git et définir le répertoire de travail, puis copier les fichiers du projet dans le conteneur. (evite des erreurs de permissions)
+# 4. Installer les dépendances Flutter et vérifier la structure des fichiers.
+# 5. Construire l'application Flutter pour le web.
+# 6. Utiliser une image nginx pour servir les fichiers web construits et configurer HTTPS avec des certificats SSL auto-signés.
+
+# Pourquoi un utilisateur non-root est nécessaire :
+# Utiliser un utilisateur non-root améliore la sécurité en limitant les privilèges des processus exécutés dans le conteneur.
+
+
+
 # Utiliser l'image officielle Flutter 3.22.2 pour la phase de build
 FROM ghcr.io/cirruslabs/flutter:3.22.2 AS build
 
