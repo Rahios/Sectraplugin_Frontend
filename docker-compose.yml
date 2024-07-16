@@ -1,6 +1,8 @@
 services:
   flutter-web:
+    image : flutter-web-app:latest
     build: .
     ports: # Port forwarding, [host]:[container]
       - "80:80"
       - "443:443"
+
