@@ -68,6 +68,7 @@ FROM nginx:stable-alpine
 COPY --from=build /home/user/app/build/web /usr/share/nginx/html
 
 # Générer des certificats SSL auto-signés dans le conteneur
+# Suggestions : Modifier ce code pour ne pas stocker un secret dans l'image & Supprimer le cache après l'installation des paquets.
 RUN apk add openssl && \
     mkdir -p /etc/ssl/private && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/cert.key -out /etc/ssl/certs/cert.crt -subj "/CN=localhost"
