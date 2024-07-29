@@ -21,7 +21,11 @@ class MyApp extends StatelessWidget
 
       // PROVIDERS - For state management & dependency injection
       providers: [
-        ChangeNotifierProvider(create: (_) => HistolungViewModel(controller: HistolungController(),),),
+        ChangeNotifierProvider(
+          create: (_) => HistolungViewModel(
+            controller: HistolungController(),
+          ),
+        ),
       ],
 
       // THEME - For consistent styling
