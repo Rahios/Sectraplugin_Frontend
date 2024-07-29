@@ -1,0 +1,23 @@
+Architecture du Projet : MVCVM ( Model - View - Controller - ViewModel )
+
+lib/
+│
+├── controllers/
+│   └── item_controller.dart        // Les contrôleurs gèrent les interactions utilisateur
+│
+├── models/
+│   └── item_model.dart             // Les classes de données représentant les objets métiers
+│
+├── viewmodels/
+│   └── item_viewmodel.dart         // La logique métier et le state management pour chaque vue
+│
+├── views/
+│   ├── home_page.dart              // Les widgets d'interface utilisateur
+│   └── item_list_page.dart         // La page qui affiche la liste des éléments
+│       └── widgets/
+│           └── item_tile.dart      // Les widgets réutilisables
+│
+├── services/
+│   └── api_service.dart            // La communication avec l'API REST
+│
+└── main.dart                       // Point d'entrée de l'application
