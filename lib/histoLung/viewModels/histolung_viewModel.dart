@@ -6,10 +6,10 @@ import '../controllers/histolung_controller.dart';
 
 class HistolungViewModel extends ChangeNotifier
 {
-
   final HistolungController controller;
   Histolung? _histolung;
   Uint8List? _heatmap;
+  bool _isLoading = false;
 
   // CONSTRUCTOR
   HistolungViewModel({required this.controller});
@@ -17,7 +17,7 @@ class HistolungViewModel extends ChangeNotifier
   // GETTER
   Histolung? get histolung => _histolung;
   Uint8List? get heatmap   => _heatmap;
-
+  bool get isLoading => _isLoading;
 
   // SETTER
   Future<void> analyzeImage(String imageName) async
@@ -29,6 +29,11 @@ class HistolungViewModel extends ChangeNotifier
   Future<void> loadHeatmap() async
   {
     _heatmap = await controller.getHeatmap();
+    notifyListeners();
+  }
+
+  void _setLoading(bool loading) {
+    _isLoading = loading;
     notifyListeners();
   }
 }

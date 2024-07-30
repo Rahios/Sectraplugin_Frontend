@@ -1,13 +1,9 @@
-// lib/views/histolung_page.dart
-
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewModels/histolung_viewModel.dart';
 
-class HistolungPage extends StatelessWidget
-{
+class HistolungPage extends StatelessWidget {
   const HistolungPage({super.key});
 
   @override
@@ -19,22 +15,26 @@ class HistolungPage extends StatelessWidget
     // Page UI
     return Scaffold(
       appBar: AppBar(title: const Text('Histolung Analysis')),
-      body: Column(
-        children: [
-          viewModel.histolung == null
-              ? const Center(child: Text('No data'))
-              : Column(
-            children: [
-              Text('Prediction: ${viewModel.histolung!.prediction}'),
-              viewModel.heatmap != null
-                  ? Image.memory(viewModel.heatmap!)
-                  : const Text('No heatmap available'),
-            ],
-          ),
-        ],
+      body: viewModel.isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+        child: Column(
+          children: [
+            viewModel.histolung == null
+                ? const Center(child: Text('No data'))
+                : Column(
+              children: [
+                Text('Prediction: ${viewModel.histolung!.prediction}'),
+                viewModel.heatmap != null
+                    ? Center(
+                  child: Image.memory(viewModel.heatmap!),
+                )
+                    : const Center(child: Text('No heatmap available')),
+              ],
+            ),
+          ],
+        ),
       ),
-
-      // Button to analyze the image and load the heatmap
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
