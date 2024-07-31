@@ -28,11 +28,11 @@ class HistolungViewModel extends ChangeNotifier
   // CONSTRUCTOR
   HistolungViewModel({required this.controller});
 
-  // GETTER from the model
+  // GETTER
   HistolungModel? get histolung => _histolungModel;
   Uint8List? get heatmap        => _heatmap;
   String? get prediction        => _prediction;
-  bool get isLoading            => _isLoading;
+  //bool get isLoading            => _isLoading;
 
   // SETTER
   Future<void> analyzeImage(String imageName) async
