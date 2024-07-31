@@ -32,13 +32,13 @@ class HistolungPage extends StatelessWidget
           children: [
             // Image - Display the image
             viewModel.histolung == null
-                ? const Center(child: Text('No data'))
+                ? const Center(child: Text('No data model available'))
                 : Column(
               children: [
-                Text('Prediction: ${viewModel.histolung!.prediction}'),
-                viewModel.heatmap != null
+                Text('Prediction: ${viewModel.histolung!.prediction}'), // !. = Signifie que histolung ne peut pas être null
+                viewModel.histolung!.heatmap.isNotEmpty
                     ? Center(
-                  child: Image.memory(viewModel.heatmap!),
+                  child: Image.memory(viewModel.histolung!.heatmap),
                 )
                     : const Center(child: Text('No heatmap available')),
               ],

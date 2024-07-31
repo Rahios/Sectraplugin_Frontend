@@ -21,8 +21,8 @@ class HistolungViewModel extends ChangeNotifier
 
   // Properties of the model to be used by the viewModel
   HistolungModel? _histolungModel;
-  Uint8List?      _heatmap;
-  String?         _prediction;
+  //Uint8List?      _heatmap;
+  //String?         _prediction;
   bool            _isLoading = false;
 
   // CONSTRUCTOR
@@ -31,8 +31,8 @@ class HistolungViewModel extends ChangeNotifier
   // GETTER from the ChangeNotifier class that we are extending
   // Properties to be used by the view Ui to display the data of the model
   HistolungModel? get histolung => _histolungModel;
-  Uint8List? get heatmap        => _heatmap;
-  String? get prediction        => _prediction;
+  //Uint8List? get heatmap        => _heatmap;
+  //String? get prediction        => _prediction;
   bool get isLoading            => _isLoading;
 
   // SETTER to update the state of the model and notify the listeners. Done with the ChangeNotifier class
