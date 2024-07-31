@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewModels/histolung_viewModel.dart';
@@ -6,7 +5,7 @@ import '../viewModels/histolung_viewModel.dart';
 // VIEW - Histolung Page UI
 // ROLE : User actions are captured in the UI and passed to the ViewModel
 // Implements the ViewModel listener to update the UI based on ViewModel changes
-//
+// Is a stateless because the state is managed by the ViewModel and not the UI
 class HistolungPage extends StatelessWidget
 {
   // Constructor with key - To identify the widget uniquely in the widget tree
@@ -50,8 +49,9 @@ class HistolungPage extends StatelessWidget
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          // DONNER UN NOM MANUELLEMENT DE L'IMAGE A ANALYSER
           FloatingActionButton(
-            onPressed: () => viewModel.analyzeImage('sample_image_name'),
+            onPressed: () => viewModel.analyzeImage('TCGA-18-3417-01Z-00-DX1.tif'),
             tooltip: 'Analyze Image',
             child: const Icon(Icons.analytics),
           ),

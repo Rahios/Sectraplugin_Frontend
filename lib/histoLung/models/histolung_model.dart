@@ -3,11 +3,14 @@
 // MODEL
 // Contains the Histolung class which is used to convert JSON to object.
 // ROLE : Stores core data to be displayed in the Histolung page.
+import 'dart:convert';
+import 'dart:typed_data';
+
 class HistolungModel
 {
   // ATTRIBUTES
-  final String prediction;
-  final String heatmap; // Stores in base64 format as string
+  late final String    prediction;
+  late final Uint8List heatmap;
 
   // CONSTRUCTOR
   HistolungModel({
@@ -20,7 +23,16 @@ class HistolungModel
     return HistolungModel(
       // json['Key'] is used to access the value of the attribute in JSON
       prediction: json['Prediction'],
-      heatmap: json['Heatmap'],
+      heatmap: base64Decode(json['Heatmap']), // Convert Base64 string to Uint8List
     );
+  }
+
+  // METHOD TO CONVERT OBJECT TO JSON
+  // Map<String, dynamic> is used to convert object to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'Prediction': prediction,
+      'Heatmap': base64Encode(heatmap), // Convert Uint8List to Base64 string
+    };
   }
 }

@@ -17,25 +17,38 @@ class HistolungController
   // Interact with the API to analyze the image
   Future<HistolungModel> analyzeImage(String imageName) async
   {
-    // Send a POST request to the API
-    final response = await http.post(
-      Uri.parse('$baseUrl/AnalyseImage'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({'ImageName': imageName}),
-    );
+    print('CONTROLLER - Analyzing image: $imageName');
 
-    if (response.statusCode == 200)
+    try
     {
+      // Send a POST request to the API
+      final response = await http.post(
+        Uri.parse('$baseUrl/AnalyseImage'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'ImageName': imageName}), //Same 'ImageName' param name as the API expects in the request body
+      ) // Set a timeout for the request
+          .timeout(const Duration(minutes: 3, seconds: 30), onTimeout: () {
+        String message = 'Connection timed out, operation took too long';
+        print(message);
+        throw Exception(message);
+      });
 
-      final responseBody = json.decode(response.body);
+      print('Response status: ${response.statusCode}');
+      print('Analyzing image retrieved successfully');
 
-      // Decode the Base64 string from the response and convert it to a Uint8List
-      String base64String = responseBody['Image'];
-
-      return HistolungModel.fromJson(json.decode(response.body));
+      if (response.statusCode == 200)
+      {
+        printWithMaxLines('Response body: ${response.body}', 10);
+        return HistolungModel.fromJson(json.decode(response.body));
+      }
+      else
+      {
+        throw Exception('Failed to analyze image. Status code not == 200');
+      }
     }
-    else
+    catch (e)
     {
+      print('Error analyzing image: $e');
       throw Exception('Failed to analyze image');
     }
   }
@@ -43,12 +56,42 @@ class HistolungController
   // Download the latest heatmap
   Future<Uint8List> getHeatmap() async
   {
-    final response = await http.get(Uri.parse('$baseUrl/GetHeatmap'));
+    print('CONTROLLER - Downloading heatmap');
+    try
+    {
+      print('Downloading heatmap');
+      final response = await http.get(Uri.parse('$baseUrl/GetHeatmap'));
 
-    if (response.statusCode == 200) {
-      return response.bodyBytes;
-    } else {
+      print('Response status: ${response.statusCode}');
+      print('Heatmap retrieved successfully ${response.bodyBytes}');
+
+      if (response.statusCode == 200)
+      {
+        print('Heatmap retrieved successfully');
+        return response.bodyBytes;
+      } else {
+        throw Exception('Failed to load heatmap. Status code not == 200');
+      }
+    }
+    catch (e)
+    {
+      print('Error loading heatmap: $e');
       throw Exception('Failed to load heatmap');
     }
+
+  }
+
+  void printWithMaxLines(String text, int maxLines) {
+    // Sépare le texte en lignes
+    List<String> lines = text.split('\n');
+
+    // Prend seulement les premières `maxLines` lignes
+    lines = lines.take(maxLines).toList();
+
+    // Combine les lignes en une seule chaîne avec des sauts de ligne
+    String truncatedText = lines.join('\n');
+
+    // Imprime le texte tronqué
+    print(truncatedText);
   }
 }
