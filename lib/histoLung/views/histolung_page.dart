@@ -34,8 +34,25 @@ class HistolungPage extends StatelessWidget
             viewModel.histolung == null
                 ? const Center(child: Text('No data model available'))
                 : Column(
+
+              // UI : Column of Prediction Details and Heatmap vertically aligned
               children: [
-                Text('Prediction: ${viewModel.histolung!.prediction}'), // !. = Signifie que histolung ne peut pas être null
+                // Prediction Details
+                const Text('Prediction Details:'),
+                if (viewModel.predictionDetails != null)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      // UI : List of Prediction Details horizontally aligned with key-value pairs
+                      // Each entry is a row with key and value displayed
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: viewModel.predictionDetails!.entries
+                          .map((entry) => Text('${entry.key}: ${entry.value}'))
+                          .toList(),
+                    ),
+                  ),
+
+                // Heatmap
                 viewModel.histolung!.heatmap.isNotEmpty
                     ? Center(
                   child: Image.memory(viewModel.histolung!.heatmap),
