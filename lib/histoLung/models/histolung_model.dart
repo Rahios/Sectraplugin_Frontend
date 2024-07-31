@@ -1,5 +1,3 @@
-// lib/models/histolung_model.dart
-
 // MODEL
 // Contains the Histolung class which is used to convert JSON to object.
 // ROLE : Stores core data to be displayed in the Histolung page.
@@ -20,13 +18,16 @@ class HistolungModel
   // FACTORY TO CONVERT JSON TO OBJECT
   factory HistolungModel.fromJson(Map<String, dynamic> json) // Map is a collection of key-value pairs
   {
-    // Use empty string if 'Prediction' is null
+    // Use empty string if 'prediction' is null
     // ?? is used to return the value of the attribute if it is not null, otherwise return an empty string
-    String prediction = json['Prediction'] ?? '';
-
-    // Use empty string if 'Heatmap' is null
-    Uint8List heatmap = base64Decode(json['Heatmap'] ?? '');
-
+    String prediction = json['prediction'] ?? '';
+    
+    print('Prediction: $prediction');
+    
+    // Use empty string if 'heatmap' is null
+    Uint8List heatmap = base64Decode(json['heatmap'] ?? '');
+    print('Heatmap: $heatmap');
+    
     return HistolungModel(
       // json['Key'] is used to access the value of the attribute in JSON
       prediction: prediction,

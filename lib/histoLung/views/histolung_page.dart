@@ -49,7 +49,7 @@ class HistolungPage extends StatelessWidget
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // DONNER UN NOM MANUELLEMENT DE L'IMAGE A ANALYSER
+          //todo: DONNER UN NOM MANUELLEMENT DE L'IMAGE A ANALYSER
           FloatingActionButton(
             onPressed: () => viewModel.analyzeImage('TCGA-18-3417-01Z-00-DX1.tif'),
             tooltip: 'Analyze Image',

@@ -1,6 +1,3 @@
-// lib/controllers/histolung_controller.dart
-
-import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/histolung_model.dart';
@@ -39,7 +36,7 @@ class HistolungController
 
       if (response.statusCode == 200)
       {
-        printWithMaxLines('Response body: ${response.body}', 10);
+        print('Response body: ${response.body}');
         return HistolungModel.fromJson(json.decode(response.body));
       }
       else
@@ -85,19 +82,5 @@ class HistolungController
       throw Exception('Failed to load heatmap');
     }
 
-  }
-
-  void printWithMaxLines(String text, int maxLines) {
-    // Sépare le texte en lignes
-    List<String> lines = text.split('\n');
-
-    // Prend seulement les premières `maxLines` lignes
-    lines = lines.take(maxLines).toList();
-
-    // Combine les lignes en une seule chaîne avec des sauts de ligne
-    String truncatedText = lines.join('\n');
-
-    // Imprime le texte tronqué
-    print(truncatedText);
   }
 }
