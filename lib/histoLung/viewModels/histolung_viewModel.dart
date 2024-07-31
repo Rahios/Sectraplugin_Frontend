@@ -19,7 +19,7 @@ class HistolungViewModel extends ChangeNotifier
   // Controller to be used by the view model
   final HistolungController controller;
 
-  // Properties to be used by the view Ui
+  // Properties of the model to be used by the viewModel
   HistolungModel? _histolungModel;
   Uint8List?      _heatmap;
   String?         _prediction;
@@ -28,13 +28,14 @@ class HistolungViewModel extends ChangeNotifier
   // CONSTRUCTOR
   HistolungViewModel({required this.controller});
 
-  // GETTER
+  // GETTER from the ChangeNotifier class that we are extending
+  // Properties to be used by the view Ui to display the data of the model
   HistolungModel? get histolung => _histolungModel;
   Uint8List? get heatmap        => _heatmap;
   String? get prediction        => _prediction;
-  //bool get isLoading            => _isLoading;
+  bool get isLoading            => _isLoading;
 
-  // SETTER
+  // SETTER to update the state of the model and notify the listeners. Done with the ChangeNotifier class
   Future<void> analyzeImage(String imageName) async
   {
     print("VIEW MODEL : analyzeImage() called");
@@ -107,8 +108,8 @@ class HistolungViewModel extends ChangeNotifier
     // Print the data of the model to the console
     print("VIEW MODEL : Printing the data of the model");
     print("VIEW MODEL : Histolung Model : ${_histolungModel.toString()}");
-    print("VIEW MODEL : Heatmap : ${_heatmap.toString()}");
-    print("VIEW MODEL : Prediction : ${prediction.toString()}");
+    print("VIEW MODEL : Heatmap : ${_histolungModel?.heatmap.toString()}");
+    print("VIEW MODEL : Prediction : ${_histolungModel?.prediction.toString()}");
     print("VIEW MODEL : Data printed");
 
   }
