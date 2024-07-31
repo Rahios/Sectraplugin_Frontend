@@ -16,17 +16,22 @@ import '../controllers/histolung_controller.dart';
 // Implement the business logic of the application
 class HistolungViewModel extends ChangeNotifier
 {
+  // Controller to be used by the view model
   final HistolungController controller;
+
+  // Properties to be used by the view Ui
   HistolungModel? _histolungModel;
-  Uint8List? _heatmap;
-  bool _isLoading = false;
+  Uint8List?      _heatmap;
+  String?         _prediction;
+  bool            _isLoading = false;
 
   // CONSTRUCTOR
   HistolungViewModel({required this.controller});
 
-  // GETTER
+  // GETTER from the model
   HistolungModel? get histolung => _histolungModel;
   Uint8List? get heatmap        => _heatmap;
+  String? get prediction        => _prediction;
   bool get isLoading            => _isLoading;
 
   // SETTER
@@ -96,5 +101,15 @@ class HistolungViewModel extends ChangeNotifier
     _isLoading = loading;
     print("VIEW MODEL : Loading set to $_isLoading");
     notifyListeners();
+  }
+
+  printModelData() {
+    // Print the data of the model to the console
+    print("VIEW MODEL : Printing the data of the model");
+    print("VIEW MODEL : Histolung Model : ${_histolungModel.toString()}");
+    print("VIEW MODEL : Heatmap : ${_heatmap.toString()}");
+    print("VIEW MODEL : Prediction : ${prediction.toString()}");
+    print("VIEW MODEL : Data printed");
+
   }
 }

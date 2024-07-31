@@ -61,6 +61,12 @@ class HistolungPage extends StatelessWidget
             tooltip: 'Load Heatmap',
             child: const Icon(Icons.image),
           ),
+          const SizedBox(height: 10),
+          FloatingActionButton(
+            onPressed: () => viewModel.printModelData(),
+            tooltip: 'Print in console the model data',
+            child: const Icon(Icons.ac_unit),
+          ),
         ],
       ),
     );
