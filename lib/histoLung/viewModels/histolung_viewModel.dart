@@ -36,19 +36,30 @@ class HistolungViewModel extends ChangeNotifier
     // Set loading to true
     _setLoading(true);
 
-    // Fetch the data from the controller
-    print("VIEW MODEL : Fetching data from the controller");
-    _histolungModel = await controller.analyzeImage(imageName); // Can take up to 3min30
-    print("VIEW MODEL : Data fetched from the controller. Model updated");
-    
-    // Set loading to false
-    _setLoading(false);
-    
-    // Notify the listeners that the state has changed
-    print("VIEW MODEL : Notifying the listeners that the state has changed");
-    notifyListeners(); // will call the builder method in the UI to rebuild the widget
-    // this notification is called because the state of the model has changed, the model has been updated
-    // the UI needs to be updated to reflect the new state of the model
+    try
+    {
+      // Fetch the data from the controller
+      print("VIEW MODEL : Fetching data from the controller");
+      _histolungModel = await controller.analyzeImage(imageName); // Can take up to 3min30
+      print("VIEW MODEL : Data fetched from the controller. Model updated");
+    }
+    catch(e)
+    {
+      print("VIEW MODEL : Error in fetching data from the controller");
+      print('Error: $e');
+    }
+    finally
+    {
+      // Set loading to false
+      _setLoading(false);
+
+      // Notify the listeners that the state has changed
+      print("VIEW MODEL : Notifying the listeners that the state has changed");
+      notifyListeners(); // will call the builder method in the UI to rebuild the widget
+      // this notification is called because the state of the model has changed, the model has been updated
+      // the UI needs to be updated to reflect the new state of the model
+    }
+
   }
 
   Future<void> loadHeatmap() async
@@ -56,23 +67,28 @@ class HistolungViewModel extends ChangeNotifier
     print("VIEW MODEL : loadHeatmap() called");
     // Set loading to true
     _setLoading(true);
-    
-    // Fetch the data from the controller
-    print("VIEW MODEL : Fetching data from the controller");
-    _heatmap = await controller.getHeatmap();
 
-    // pass the heatmap to the model to display it in the UI. set the heatmap in the model and the prediction to null
-    _histolungModel?.prediction = "null";
-    _histolungModel?.heatmap = _heatmap!;
+    try
+    {
+      // Fetch the data from the controller
+      print("VIEW MODEL : Fetching data from the controller");
+      _histolungModel = await controller.getHeatmap();
 
-    print("VIEW MODEL : Data fetched from the controller. Heatmap updated");
-    
-    // Set loading to false
-    _setLoading(false);
+      print("VIEW MODEL : Data fetched from the controller. Heatmap updated");
+    }
+    catch(e)
+    {
+      print("VIEW MODEL : Error in fetching data from the controller");
+    }
+    finally
+    {
+      // Set loading to false
+      _setLoading(false);
 
-    // Notify the listeners that the state has changed
-    print("VIEW MODEL : Notifying the listeners that the state has changed");
-    notifyListeners();
+      // Notify the listeners that the state has changed
+      print("VIEW MODEL : Notifying the listeners that the state has changed");
+      notifyListeners();
+    }
   }
 
   void _setLoading(bool loading)

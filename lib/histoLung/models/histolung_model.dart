@@ -9,8 +9,8 @@ import 'dart:typed_data';
 class HistolungModel
 {
   // ATTRIBUTES
-  late final String    prediction;
-  late final Uint8List heatmap;
+  final String    prediction;
+  final Uint8List heatmap;
 
   // CONSTRUCTOR
   HistolungModel({
@@ -20,10 +20,17 @@ class HistolungModel
   // FACTORY TO CONVERT JSON TO OBJECT
   factory HistolungModel.fromJson(Map<String, dynamic> json) // Map is a collection of key-value pairs
   {
+    // Use empty string if 'Prediction' is null
+    // ?? is used to return the value of the attribute if it is not null, otherwise return an empty string
+    String prediction = json['Prediction'] ?? '';
+
+    // Use empty string if 'Heatmap' is null
+    Uint8List heatmap = base64Decode(json['Heatmap'] ?? '');
+
     return HistolungModel(
       // json['Key'] is used to access the value of the attribute in JSON
-      prediction: json['Prediction'],
-      heatmap: base64Decode(json['Heatmap']), // Convert Base64 string to Uint8List
+      prediction: prediction,
+      heatmap: heatmap, // Convert Base64 string to Uint8List
     );
   }
 

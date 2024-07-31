@@ -27,11 +27,12 @@ class HistolungController
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'ImageName': imageName}), //Same 'ImageName' param name as the API expects in the request body
       ) // Set a timeout for the request
-          .timeout(const Duration(minutes: 3, seconds: 30), onTimeout: () {
-        String message = 'Connection timed out, operation took too long';
-        print(message);
-        throw Exception(message);
-      });
+          .timeout(const Duration(minutes: 3, seconds: 30),
+          onTimeout: () {
+            String message = 'Connection timed out, operation took too long';
+            print(message);
+            throw Exception(message);
+          });
 
       print('Response status: ${response.statusCode}');
       print('Analyzing image retrieved successfully');
@@ -54,7 +55,7 @@ class HistolungController
   }
 
   // Download the latest heatmap
-  Future<Uint8List> getHeatmap() async
+  Future<HistolungModel> getHeatmap() async
   {
     print('CONTROLLER - Downloading heatmap');
     try
@@ -68,7 +69,12 @@ class HistolungController
       if (response.statusCode == 200)
       {
         print('Heatmap retrieved successfully');
-        return response.bodyBytes;
+
+        // Instanciate a new HistolungModel object with the heatmap data and a null prediction value
+        return HistolungModel(
+            heatmap: response.bodyBytes,
+            prediction: '');
+
       } else {
         throw Exception('Failed to load heatmap. Status code not == 200');
       }
