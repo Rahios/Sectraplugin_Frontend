@@ -3,23 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewModels/histolung_viewModel.dart';
 
-class HistolungPage extends StatelessWidget {
+// VIEW - Histolung Page UI
+// ROLE : User actions are captured in the UI and passed to the ViewModel
+// Implements the ViewModel listener to update the UI based on ViewModel changes
+//
+class HistolungPage extends StatelessWidget
+{
+  // Constructor with key - To identify the widget uniquely in the widget tree
   const HistolungPage({super.key});
 
+  // Build - UI
   @override
   Widget build(BuildContext context)
   {
-    // Dependency Injection
+    // Dependency Injection - LISTENER of ViewModel changes
     final viewModel = Provider.of<HistolungViewModel>(context);
 
     // Page UI
     return Scaffold(
+      // AppBar - Page title
       appBar: AppBar(title: const Text('Histolung Analysis')),
+
+      // Body - Page content
+      // If loading, show progress indicator
       body: viewModel.isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
         child: Column(
           children: [
+            // Image - Display the image
             viewModel.histolung == null
                 ? const Center(child: Text('No data'))
                 : Column(

@@ -8,11 +8,15 @@ import 'histoLung/controllers/histolung_controller.dart';
 import 'histoLung/viewModels/histolung_viewModel.dart';
 import 'histoLung/views/histolung_page.dart';
 
+// How to remove the A4 format for my code ? there is a vertical line that I can't remove and my code wraps around
+
+
 void main() {
   // ToDo : remove this HTTP override for production build. Use Let's Encrypt SSL in the backend & Frontend.
   HttpOverrides.global = MyHttpOverrides(); // For SSL certificate (self signed), for testing purposes only
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget
 {
@@ -26,23 +30,26 @@ class MyApp extends StatelessWidget
 
       // PROVIDERS - For state management & dependency injection
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => HistolungViewModel(
-            controller: HistolungController(),
+        // Provider for ViewModel & Controller
+        ChangeNotifierProvider(                 // Notifier listens to changes in the ViewModel and updates the UI accordingly
+          create: (_) => HistolungViewModel(    // Creates a new instance of the ViewModel. it's a singleton injected into the Provider. (Dependency Injection)
+            controller: HistolungController(),  // Injects the Controller into the ViewModel. (Dependency Injection) So that the ViewModel can call the Controller's methods.
           ),
         ),
       ],
 
-      // THEME - For consistent styling
+      // MaterialApp - The main widget of the app
       child: MaterialApp(
         title: 'SECTRA PACS - Plugin Viewer',
+
+        // PAGES - For navigation
+        home: const HistolungPage(),
+
+        // THEME - For styling
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.amberAccent),
           useMaterial3: true,
         ),
-
-        // PAGES - For navigation
-        home: HistolungPage(),
       ),
     );
   }
