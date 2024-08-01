@@ -14,7 +14,7 @@ class TopPanel extends StatelessWidget {
       onVerticalDragUpdate: (DragUpdateDetails details) {
         viewModel.updateTopPanelHeight(details.delta.dy);
       },
-      child: Container(                                             //todo
+      child: SizedBox(                                             //todo
         height: viewModel.topPanelHeight,
         child: Row(
           children: [
