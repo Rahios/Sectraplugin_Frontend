@@ -27,11 +27,11 @@ class HistolungViewModel extends ChangeNotifier
 
 
   // CONSTRUCTOR
-  HistolungViewModel({required this.controller});
-  /*{
+  HistolungViewModel({required this.controller})
+  {
     // Automatically scan the images folder on initialization
     scanImagesFolder();
-  }*/
+  }
 
   // GETTER from the ChangeNotifier class that we are extending
   // Properties to be used by the view Ui to display the data of the model
