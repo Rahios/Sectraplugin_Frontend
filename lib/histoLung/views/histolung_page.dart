@@ -77,6 +77,7 @@ class HistolungPage extends StatelessWidget {
                                   trailing: IconButton(
                                     icon: const Icon(Icons.analytics),
                                     onPressed: () => viewModel.analyzeImage(imageName),
+                                    tooltip: 'Lancer l\'analyse de l\'image $imageName',
                                   ),
                                 );
                               },

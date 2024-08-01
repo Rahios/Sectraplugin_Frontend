@@ -10,8 +10,11 @@ import 'histoLung/views/histolung_page.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   // ToDo : remove this HTTP override for production build. Use Let's Encrypt SSL in the backend & Frontend.
   HttpOverrides.global = MyHttpOverrides(); // For SSL certificate (self signed), for testing purposes only
+
   runApp(const MyApp());
 }
 
@@ -46,17 +49,15 @@ class MyApp extends StatelessWidget
 
         // THEME - For styling
         theme: ThemeData(
-          colorScheme: ColorScheme.light(
+          colorScheme: const ColorScheme.light(
             primary: Color(0xFF667FC3), // Soft blue for primary color
             onPrimary: Colors.white, // Text color on primary color
             secondary: Color(0xFF56A15B), // Soft green for secondary color
-            onSecondary: Colors.white, // Text color on secondary color
-            background: Color(0xFFF5F5F5), // Light grey for background
-            surface: Colors.white, // White for surface backgrounds
-            onBackground: Colors.black, // Black text on background
+            onSecondary: Colors.white, // Light grey for background
+            surface: Colors.white, // Black text on background
             onSurface: Colors.black, // Black text on surface
           ),
-          scaffoldBackgroundColor: Color(0xFFF5F5F5), // Light grey background for the app
+          scaffoldBackgroundColor: const Color(0xFFF5F5F5), // Light grey background for the app
           appBarTheme: const AppBarTheme(
             color: Color(0xFF667FC3), // Soft blue for AppBar
             iconTheme: IconThemeData(color: Colors.white), // White icons on AppBar
@@ -82,12 +83,11 @@ class MyApp extends StatelessWidget
           ),
         ),
 
-        /*theme: ThemeData(
+        /* OLD THEME - BUT EASIER TO USE
+          theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.amberAccent),
           useMaterial3: true,
         ),*/
-
-
 
       ),
     );

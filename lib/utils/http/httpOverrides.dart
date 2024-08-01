@@ -1,6 +1,6 @@
 import 'dart:io';
 
-// TODO : CHANGE THIS
+// TODO : REMOVE THIS
 // This class is used to override the http request to allow the self-signed certificates
 // WARNING : this is not recommended for PRODUCTION use
 class MyHttpOverrides extends HttpOverrides

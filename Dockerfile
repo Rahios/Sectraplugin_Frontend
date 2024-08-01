@@ -58,8 +58,9 @@ RUN flutter pub get
 # Exécuter les tests unitaires (optionnel, mais recommandé)
 #RUN flutter test
 
-# Exécuter la construction de l'application Flutter pour le web
-RUN timeout 3600s flutter build web 2>&1
+# Exécuter la construction de l'application Flutter pour le web.
+# Attribut --Release pour une version de production optimisée.
+RUN timeout 3600s flutter build web --release 2>&1
 
 # Utiliser une image nginx pour servir les fichiers web construits
 FROM nginx:stable-alpine
