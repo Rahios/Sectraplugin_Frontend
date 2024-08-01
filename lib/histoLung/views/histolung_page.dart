@@ -34,7 +34,6 @@ class HistolungPage extends StatelessWidget {
               height: viewModel.topPanelHeight,
               child: Row(
                 children: [
-
                   // AVAILABLE IMAGES - Display the available images (Left)
                   GestureDetector(
                     onHorizontalDragUpdate: (DragUpdateDetails details) {
@@ -45,20 +44,27 @@ class HistolungPage extends StatelessWidget {
                       color: Colors.grey[200],
                       child: Column(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'Images disponibles',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                const Expanded(
+                                  child: Text(
+                                    'Images disponibles',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.refresh),
+                                  onPressed: () => viewModel.scanImagesFolder(),
+                                  tooltip: 'Rafraîchir la liste des images disponibles',
+                                ),
+                              ],
                             ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.refresh),
-                            onPressed: () => viewModel.scanImagesFolder(),
-                            tooltip: 'Rafrachir la liste des images disponibles',
                           ),
                           Expanded(
                             child: viewModel.availableImages.isNotEmpty
@@ -144,8 +150,8 @@ class HistolungPage extends StatelessWidget {
             spacing: 10,
             children: [
               FloatingActionButton(
-                onPressed: () => viewModel.analyzeImage('TCGA-18-3417-01Z-00-DX1.tif'),
-                tooltip: 'Analyser Image : TCGA-18-3417-01Z-00-DX1.tif',
+                onPressed: () => viewModel.analyzeImage('TCGA-85-6798-01Z-00-DX1.tif'),
+                tooltip: 'Analyser Image : TCGA-85-6798-01Z-00-DX1.tif',
                 child: const Icon(Icons.analytics),
               ),
               FloatingActionButton(

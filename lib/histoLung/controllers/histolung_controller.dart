@@ -139,7 +139,7 @@ class HistolungController
       print('Error scanning images folder: $e');
       throw Exception('Failed to scan images folder');
     }
-  
+
   }
 
 
