@@ -65,6 +65,34 @@ class HistolungViewModel extends ChangeNotifier
 
   }
 
+  Future<void> getLastAnalysis() async
+  {
+    print("VIEW MODEL : getLastAnalysis() called");
+    setLoading(true);
+
+    try
+    {
+      // Fetch the data from the controller
+      print("VIEW MODEL : Fetching data from the controller");
+      _histolungModel = await controller.getLastAnalysis();
+      extractPredictionDetails();
+      print("VIEW MODEL : Data fetched from the controller. Model updated");
+    }
+    catch(e)
+    {
+      print("VIEW MODEL : Error in fetching data from the controller");
+      print('Error: $e');
+    }
+    finally
+    {
+      setLoading(false);
+
+      // Notify the listeners that the state has changed
+      print("VIEW MODEL : Notifying the listeners that the state has changed");
+      notifyListeners(); // will call the builder method in the UI to rebuild the widget
+    }
+
+  }
 
   Future<void> loadHeatmap() async
   {

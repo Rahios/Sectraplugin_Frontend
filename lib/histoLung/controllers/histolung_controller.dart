@@ -51,6 +51,36 @@ class HistolungController
     }
   }
 
+
+  // Download the latest analysis result from the API
+  Future<HistolungModel> getLastAnalysis() async
+  {
+    print('CONTROLLER - Downloading latest analysis');
+    try
+    {
+      print('Downloading heatmap');
+      final response = await http.get(Uri.parse('$baseUrl/GetLatestAnalysis'));
+
+      print('Response status: ${response.statusCode}');
+
+      if (response.statusCode == 200)
+      {
+        print('Response body: ${response.body}');
+        return HistolungModel.fromJson(json.decode(response.body));
+
+      }
+      else {
+        throw Exception('Failed to load the latest Analysis. Status code not == 200');
+      }
+    }
+    catch (e)
+    {
+      print('Error loading heatmap: $e');
+      throw Exception('Failed to load heatmap');
+    }
+  }
+
+
   // Download the latest heatmap
   Future<HistolungModel> getHeatmap() async
   {
@@ -83,4 +113,6 @@ class HistolungController
     }
 
   }
+
+
 }

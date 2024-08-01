@@ -8,8 +8,6 @@ import 'histoLung/controllers/histolung_controller.dart';
 import 'histoLung/viewModels/histolung_viewModel.dart';
 import 'histoLung/views/histolung_page.dart';
 
-// How to remove the A4 format for my code ? there is a vertical line that I can't remove and my code wraps around
-
 
 void main() {
   // ToDo : remove this HTTP override for production build. Use Let's Encrypt SSL in the backend & Frontend.
@@ -45,11 +43,52 @@ class MyApp extends StatelessWidget
         // PAGES - For navigation
         home: const HistolungPage(),
 
+
         // THEME - For styling
         theme: ThemeData(
+          colorScheme: ColorScheme.light(
+            primary: Color(0xFF667FC3), // Soft blue for primary color
+            onPrimary: Colors.white, // Text color on primary color
+            secondary: Color(0xFF56A15B), // Soft green for secondary color
+            onSecondary: Colors.white, // Text color on secondary color
+            background: Color(0xFFF5F5F5), // Light grey for background
+            surface: Colors.white, // White for surface backgrounds
+            onBackground: Colors.black, // Black text on background
+            onSurface: Colors.black, // Black text on surface
+          ),
+          scaffoldBackgroundColor: Color(0xFFF5F5F5), // Light grey background for the app
+          appBarTheme: const AppBarTheme(
+            color: Color(0xFF667FC3), // Soft blue for AppBar
+            iconTheme: IconThemeData(color: Colors.white), // White icons on AppBar
+            titleTextStyle: TextStyle(
+              color: Colors.white, // White text on AppBar
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Color(0xFF56A15B), // Soft green for FloatingActionButton
+            foregroundColor: Colors.white, // White icons on FloatingActionButton
+          ),
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(color: Colors.black), // Black text for body text
+            titleLarge: TextStyle(color: Colors.black), // Black text for headlines
+          ),
+          cardTheme: const CardTheme(
+            color: Colors.white, // White background for cards
+            shadowColor: Colors.grey, // Grey shadow for cards
+            elevation: 4,
+            margin: EdgeInsets.all(8),
+          ),
+        ),
+
+        /*theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.amberAccent),
           useMaterial3: true,
-        ),
+        ),*/
+
+
+
       ),
     );
   }
