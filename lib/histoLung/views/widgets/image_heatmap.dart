@@ -16,10 +16,16 @@ class ImageHeatmap extends StatelessWidget {
             child: viewModel.histolung!.heatmap.isNotEmpty
                 ? InteractiveViewer(
                     panEnabled: true,
-                    boundaryMargin: const EdgeInsets.all(20),
                     minScale: 1,
                     maxScale: 10,
-                    child: Image.memory(viewModel.histolung!.heatmap),
+                    child:SizedBox( // Display the heatmap image with zoom functionality
+                      width: double.infinity,   // Set the width to the maximum available width
+                      height: double.infinity,  // Set the height to the maximum available height
+                      child: Image.memory(
+                          viewModel.histolung!.heatmap,
+                          fit: BoxFit.contain,), // BoxFit.contain: The image is as large as possible while still containing the entire image within the parent widget
+                    ),
+
                   )
                 : const Center(child: Text('Aucune heatmap disponible')),
           );
