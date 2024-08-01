@@ -21,15 +21,26 @@ class HistolungViewModel extends ChangeNotifier
   HistolungModel? _histolungModel;
   bool            _isLoading = false;
   Map<String, String>? _predictionDetails;
+  double _panelWidth = 500; // Initial width of the resizable panel
+  double _topPanelHeight = 200.0; // Initial height of the top panel
+  List<String> _availableImages = [];
+
 
   // CONSTRUCTOR
   HistolungViewModel({required this.controller});
+  /*{
+    // Automatically scan the images folder on initialization
+    scanImagesFolder();
+  }*/
 
   // GETTER from the ChangeNotifier class that we are extending
   // Properties to be used by the view Ui to display the data of the model
   HistolungModel? get histolung => _histolungModel;
   bool get isLoading            => _isLoading;
   Map<String, String>? get predictionDetails => _predictionDetails;
+  double get panelWidth             => _panelWidth;
+  double get topPanelHeight         => _topPanelHeight;
+  List<String> get availableImages  => _availableImages;
 
   // SETTER to update the state of the model and notify the listeners. Done with the ChangeNotifier class
   Future<void> analyzeImage(String imageName) async
@@ -123,6 +134,30 @@ class HistolungViewModel extends ChangeNotifier
     }
   }
 
+  // Method to scan the images folder and get the list of available images
+  Future<void> scanImagesFolder() async
+  {
+    print("VIEW MODEL : scanImagesFolder() called");
+    setLoading(true);
+    
+    try
+    {
+      _availableImages = await controller.scanImagesFolder();
+      print("VIEW MODEL : Images scanned from the folder");
+      print("VIEW MODEL : Available Images : $_availableImages");
+    }
+    catch(e)
+    {
+      print("VIEW MODEL : Error in fetching data from the controller");
+    }
+    finally
+    {
+      setLoading(false);
+      notifyListeners();
+    }
+    
+  }
+
   // Method to set the loading state of the model and notify the listeners
   void setLoading(bool loading)
   {
@@ -169,4 +204,17 @@ class HistolungViewModel extends ChangeNotifier
       }
     }
   }
+
+  // Method to update the width of the resizable panel
+  void updatePanelWidth(double delta) {
+    _panelWidth += delta;
+    notifyListeners();
+  }
+
+  // Method to update the height of the top panel
+  void updateTopPanelHeight(double delta) {
+    _topPanelHeight += delta;
+    notifyListeners();
+  }
+
 }

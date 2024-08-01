@@ -114,5 +114,33 @@ class HistolungController
 
   }
 
+  Future<List<String>> scanImagesFolder() async
+  {
+    print('CONTROLLER - Scanning images folder');
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/GetImagesList'));
+
+      print('Response status: ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        print('Response body: ${response.body}');
+        List<dynamic> jsonResponse = json.decode(response.body);
+        List<String> imageList = List<String>.from(jsonResponse);
+        print('Images list retrieved successfully');
+        print('Images list: $imageList');
+        return imageList;
+      } 
+      else {
+        throw Exception('Failed to scan images folder. Status code not == 200');
+      }
+    } 
+    catch (e) 
+    {
+      print('Error scanning images folder: $e');
+      throw Exception('Failed to scan images folder');
+    }
+  
+  }
+
 
 }
