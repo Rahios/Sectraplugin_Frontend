@@ -64,9 +64,9 @@ class HistolungController
   }
 
   Future<HistolungModel> retrieveDelayed() async {
-    print('Image not found, waiting 40 seconds before retrying');
+    print('Image not found, waiting 50 seconds before retrying');
     
-    await Future.delayed(const Duration(seconds: 40));
+    await Future.delayed(const Duration(seconds: 50));
     
     // Initialize a timer to retry for 3 minutes
     int elapsedSeconds = 0;
@@ -76,7 +76,6 @@ class HistolungController
     // Retry every 10 seconds until the max number of retries is reached or the image is found
     while (elapsedSeconds < maxRetries * retryInterval)
     {
-      await Future.delayed(const Duration(seconds: retryInterval));
       try
       {
         HistolungModel latestAnalysis = await getLastAnalysis();
@@ -85,9 +84,10 @@ class HistolungController
           return latestAnalysis;
         }
       }
-      catch (e)
+      catch (e) // Catch the exception from "getLastAnalysis" if the request fails
       {
         print('Retrying... Elapsed time: $elapsedSeconds seconds');
+        await Future.delayed(const Duration(seconds: retryInterval));
       }
     
       elapsedSeconds += retryInterval;
