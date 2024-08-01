@@ -5,4 +5,16 @@ services:
     ports: # Port forwarding, [host]:[container]
       - "80:80"
       - "443:443"
+    # Shared network for Backend & Frontend
+    networks:
+      - SectraNet
 
+
+# External network to connect the frontend and backend containers together
+# This network has to be created manually with the command "docker network create SectraNet"
+# Is this network connected to the host network? If not, how can we connect it?
+# How can we make sure that the network is created before the containers are started?
+# How can we make sure that the network is removed when the containers are stopped? 
+networks:
+  SectraNet:
+    external: true

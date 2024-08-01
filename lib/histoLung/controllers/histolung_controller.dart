@@ -9,7 +9,7 @@ import '../models/histolung_model.dart';
 // Implement the logic to interact with the API
 class HistolungController
 {
-  final String baseUrl = 'https://153.109.124.207:8087/api/Histolung';
+  final String baseUrl = 'https://vlbeltbsectra.hevs.ch/api/Histolung';
 
   // Interact with the API to analyze the image
   Future<HistolungModel> analyzeImage(String imageName) async
