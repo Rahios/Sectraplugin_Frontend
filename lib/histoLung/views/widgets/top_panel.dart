@@ -10,11 +10,12 @@ class TopPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = Provider.of<HistolungViewModel>(context);
 
+    // 2 gestures detectors to handle the vertical and horizontal drag events on the top panel
     return GestureDetector(
       onVerticalDragUpdate: (DragUpdateDetails details) {
         viewModel.updateTopPanelHeight(details.delta.dy);
       },
-      child: SizedBox(                                             //todo
+      child: SizedBox(
         height: viewModel.topPanelHeight,
         child: Row(
           children: [
@@ -45,28 +46,36 @@ class TopPanel extends StatelessWidget {
                           IconButton(
                             icon: const Icon(Icons.refresh),
                             onPressed: () => viewModel.scanImagesFolder(),
-                            tooltip: 'Rafraîchir la liste des images disponibles',
+                            tooltip:
+                                'Rafraîchir la liste des images disponibles',
                           ),
                         ],
                       ),
                     ),
                     Expanded(
-                      child: viewModel.availableImages.isNotEmpty
-                          ? ListView.builder(
-                        itemCount: viewModel.availableImages.length,
-                        itemBuilder: (context, index) {
-                          final imageName = viewModel.availableImages[index];
-                          return ListTile(
-                            title: Text(imageName),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.analytics),
-                              onPressed: () => viewModel.analyzeImage(imageName),
-                              tooltip: 'Lancer l\'analyse de l\'image $imageName',
-                            ),
-                          );
-                        },
-                      )
-                          : const Center(child: Text('Aucune image disponible pour l\'analyse')),
+                      child: viewModel.isImagesFolderLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : viewModel.availableImages.isNotEmpty
+                              ? ListView.builder(
+                                  itemCount: viewModel.availableImages.length,
+                                  itemBuilder: (context, index) {
+                                    final imageName =
+                                        viewModel.availableImages[index];
+                                    return ListTile(
+                                      title: Text(imageName),
+                                      trailing: IconButton(
+                                        icon: const Icon(Icons.analytics),
+                                        onPressed: () =>
+                                            viewModel.analyzeImage(imageName),
+                                        tooltip:
+                                            'Lancer l\'analyse de l\'image $imageName',
+                                      ),
+                                    );
+                                  },
+                                )
+                              : const Center(
+                                  child: Text(
+                                      'Aucune image disponible pour l\'analyse')),
                     ),
                   ],
                 ),
@@ -97,7 +106,8 @@ class TopPanel extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: viewModel.predictionDetails!.entries
                               .skip(1) // Skip the first entry (index)
-                              .map((entry) => Text('${entry.key}: ${entry.value}'))
+                              .map((entry) =>
+                                  Text('${entry.key}: ${entry.value}'))
                               .toList(),
                         ),
                       )

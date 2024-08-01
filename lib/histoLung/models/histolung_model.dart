@@ -1,9 +1,9 @@
-// MODEL
-// Contains the Histolung class which is used to convert JSON to object.
-// ROLE : Stores core data to be displayed in the Histolung page.
 import 'dart:convert';
 import 'dart:typed_data';
 
+// MODEL
+// Contains the Histolung class which is used to convert JSON to object.
+// ROLE : Stores core data to be displayed in the Histolung page.
 class HistolungModel
 {
   // ATTRIBUTES

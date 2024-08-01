@@ -19,7 +19,9 @@ class HistolungViewModel extends ChangeNotifier
 
   // Properties of the model to be used by the viewModel
   HistolungModel? _histolungModel;
-  bool            _isLoading = false;
+  bool            _isLoading              = false;
+  bool            _isHeatmapLoading       = false;
+  bool            _isImagesFolderLoading  = false;
   Map<String, String>? _predictionDetails;
   double _panelWidth = 500; // Initial width of the resizable panel
   double _topPanelHeight = 200.0; // Initial height of the top panel
@@ -35,8 +37,11 @@ class HistolungViewModel extends ChangeNotifier
 
   // GETTER from the ChangeNotifier class that we are extending
   // Properties to be used by the view Ui to display the data of the model
-  HistolungModel? get histolung => _histolungModel;
-  bool get isLoading            => _isLoading;
+  // On the left (property used in the UI) and on the right (property of the view model)
+  HistolungModel? get histolung  => _histolungModel;
+  bool get isLoading             => _isLoading;
+  bool get isHeatmapLoading      => _isHeatmapLoading;
+  bool get isImagesFolderLoading => _isImagesFolderLoading;
   Map<String, String>? get predictionDetails => _predictionDetails;
   double get panelWidth             => _panelWidth;
   double get topPanelHeight         => _topPanelHeight;
@@ -138,7 +143,7 @@ class HistolungViewModel extends ChangeNotifier
   Future<void> scanImagesFolder() async
   {
     print("VIEW MODEL : scanImagesFolder() called");
-    setLoading(true);
+    setImagesFolderLoading(true);
     
     try
     {
@@ -152,7 +157,7 @@ class HistolungViewModel extends ChangeNotifier
     }
     finally
     {
-      setLoading(false);
+      setImagesFolderLoading(false);
       notifyListeners();
     }
     
@@ -163,6 +168,16 @@ class HistolungViewModel extends ChangeNotifier
   {
     _isLoading = loading;
     print("VIEW MODEL : Loading set to $_isLoading");
+    notifyListeners();
+  }
+
+  void setHeatmapLoading(bool loading) {
+    _isHeatmapLoading = loading;
+    notifyListeners();
+  }
+
+  void setImagesFolderLoading(bool loading) {
+    _isImagesFolderLoading = loading;
     notifyListeners();
   }
 
