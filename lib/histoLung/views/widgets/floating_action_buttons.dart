@@ -27,11 +27,6 @@ class FloatingActionButtons extends StatelessWidget {
               tooltip: 'Afficher la dernière analyse',
               child: const Icon(Icons.image),
             ),
-            FloatingActionButton(
-              onPressed: () => viewModel.printModelData(),
-              tooltip: 'Afficher les données du modèle',
-              child: const Icon(Icons.data_object),
-            ),
           ],
         ),
       ],
