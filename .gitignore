@@ -1,6 +1,8 @@
 # PERSONAL ADDITIONS
 # Ignore SSL certificate PRIVATE KEY
-web/sslCertificates/*
+web/sslCertificates/vlbeltbsectra.hevs.ch.key
+web/sslCertificates/intermediateCertificate
+web/sslCertificates/rootCertificate
 
 
 # Miscellaneous
