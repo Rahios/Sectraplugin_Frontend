@@ -1,4 +1,6 @@
 # PERSONAL ADDITIONS
+# Ignore SSL certificate PRIVATE KEY
+web/sslCertificates/*
 
 
 # Miscellaneous
