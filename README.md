@@ -19,7 +19,7 @@ The project uses several essential dependencies in the docker image to function 
 - **Nginx**: To serve web files and handle HTTPS requests.
 
 ## Deployed Application
-The webapp is deployed on the following URL : [https://vlbeltbsectra.hevs.ch/] (https://vlbeltbsectra.hevs.ch/) 
+The webapp is deployed on the following URL : [Sectra web app] (https://vlbeltbsectra.hevs.ch/) 
 
 ## Project Architecture
 
