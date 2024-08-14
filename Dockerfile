@@ -11,8 +11,6 @@
 # Pourquoi un utilisateur non-root est nécessaire :
 # Utiliser un utilisateur non-root améliore la sécurité en limitant les privilèges des processus exécutés dans le conteneur.
 
-
-
 # Utiliser l'image officielle Flutter 3.22.2 pour la phase de build
 FROM ghcr.io/cirruslabs/flutter:3.22.2 AS build
 
@@ -28,7 +26,6 @@ RUN apt-get update && \
     echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # Changer les permissions du répertoire Flutter SDK
-#RUN chown -R user:user /sdks/flutter
 RUN chown -R ${USER_ID}:${GROUP_ID} /sdks/flutter
 
 
@@ -77,7 +74,6 @@ COPY --from=build /home/user/app/build/web /usr/share/nginx/html
 # Copier les certificats SSL dans le conteneur
 COPY web/sslCertificates/vlbeltbsectra.hevs.ch.key /etc/ssl/private/cert.key
 COPY web/sslCertificates/vlbeltbsectra.hevs.ch.crt /etc/ssl/certs/cert.crt
-
 
 
 # Copier les fichiers de configuration nginx
