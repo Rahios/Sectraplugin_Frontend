@@ -62,18 +62,20 @@ The project follows a modular structure, with a clear separation of concerns bet
 lib/
 │
 ├── controllers/
-│   └── histolung_controller.dart       // Handles interactions with the API
+│   └── histolung_controller.dart           // Handles interactions with the API
 │
 ├── models/
-│   └── histolung_model.dart            // Represents the data structure
+│   └── histolung_model.dart                // Represents the data structure
 │
 ├── viewmodels/
-│   └── histolung_viewmodel.dart        // Manages the state and business logic
+│   └── histolung_viewmodel.dart            // Manages the state and business logic
 │
 ├── views/
-│   ├── histolung_page.dart             // UI components
-│   └── widgets/                        // Reusable UI widgets
-│       └── image_heatmap.dart          // Heatmap display widget
+│   ├── histolung_page.dart                 // UI components
+│   └── widgets/                            // Reusable UI widgets
+│       └── image_heatmap.dart              // Heatmap display widget
+│       └── floating_action_buttons.dart    // Buttons bottom right widget
+│       └── top_panel.dart                  // Panel with informations widget
 │
 ├── services/
 │   └── httpOverrides.dart              // Custom HTTP overrides for SSL
