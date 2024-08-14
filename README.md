@@ -10,81 +10,13 @@ This project is the frontend for the **Sectra Pacs Plugin** application, develop
 - **Flutter 3.22.2**: Ensure you have installed version 3.22.2 of Flutter. You can install it from the [official website](https://flutter.dev).
 - **Docker & Docker Compose**: You need Docker and Docker Compose installed on your machine to build and deploy the application.
 
-
-## Development Workflow
-
-### 1. SSH Connection and Development
-
-Development is done directly on the server via an SSH connection from IntelliJ IDEA. This allows real-time coding on the production server.
-
-### 2. Build Image
-
-To test locally, build first the necessary image for the docker compose to use:
-```bash
-./docker-build-image.sh
-```
-
-### 3. Running Services Locally
-
-To test locally, use Docker Compose to start the necessary services:
-```bash
-./docker-compose-run.sh
-```
-
-### 4. Build and Deployment
-
-When you are ready to deploy a new version, follow these steps:
-
-1. **Stop the current Docker services:**
-   ```bash
-   docker compose down
-   ```
-
-2. **Clean up existing Docker images:**
-   ```bash
-   docker rmi -f $(docker images -q)
-   ```
-
-3. **Rebuild the Flutter Docker image:**
-   ```bash
-   bash docker-build-image.sh
-   ```
-
-4. **Restart Docker services with the new image:**
-   ```bash
-   docker compose up -d
-   ```
-
-This process is automated in the `rebuild-frontend-deploy.sh` script, which you run after each modification.
-
-### 4. Nginx Configuration
-
-The application uses Nginx to serve the built files. The `nginx.conf` configuration file handles HTTP and HTTPS requests, redirects API requests, and manages SSL certificates for a secure connection.
-
 ## Dependencies
 
-The project uses several essential dependencies to function correctly:
+The project uses several essential dependencies in the docker image to function correctly:
 
 - **Flutter 3.22.2**: Main framework for developing the application.
 - **Docker & Docker Compose**: For managing containers and orchestrating services.
 - **Nginx**: To serve web files and handle HTTPS requests.
-
-## Useful Commands
-
-- **Build the application for the web:**
-  ```bash
-  flutter build web --release
-  ```
-
-- **Run the application locally with Docker:**
-  ```bash
-  docker-compose up
-  ```
-
-- **Deploy a new version:**
-  ```bash
-  ./rebuild-frontend-deploy.sh
-  ```
 
 ## Project Architecture
 
@@ -150,6 +82,76 @@ lib/
 ```
 
 This structure promotes maintainability, scalability, and ease of testing.
+
+
+
+## Development Workflow
+
+### 1. SSH Connection and Development
+
+Development is done directly on the server via an SSH connection from IntelliJ IDEA. This allows real-time coding on the production server.
+
+### 2. Build Image
+
+To test locally, build first the necessary image for the docker compose to use:
+```bash
+./docker-build-image.sh
+```
+
+### 3. Running Services Locally
+
+To test locally, use Docker Compose to start the necessary services:
+```bash
+./docker-compose-run.sh
+```
+
+### 4. Build and Deployment
+
+When you are ready to deploy a new version, follow these steps:
+
+1. **Stop the current Docker services:**
+   ```bash
+   docker compose down
+   ```
+
+2. **Clean up existing Docker images:**
+   ```bash
+   docker rmi -f $(docker images -q)
+   ```
+
+3. **Rebuild the Flutter Docker image:**
+   ```bash
+   bash docker-build-image.sh
+   ```
+
+4. **Restart Docker services with the new image:**
+   ```bash
+   docker compose up -d
+   ```
+
+This process is automated in the `rebuild-frontend-deploy.sh` script, which you run after each modification.
+
+### 4. Nginx Configuration
+
+The application uses Nginx to serve the built files. The `nginx.conf` configuration file handles HTTP and HTTPS requests, redirects API requests, and manages SSL certificates for a secure connection.
+
+
+## Useful Commands
+
+- **Build the application for the web:**
+  ```bash
+  flutter build web --release
+  ```
+
+- **Run the application locally with Docker:**
+  ```bash
+  docker-compose up
+  ```
+
+- **Deploy a new version:**
+  ```bash
+  ./rebuild-frontend-deploy.sh
+  ```
 
 ## Additional Documentation
 
