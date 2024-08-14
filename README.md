@@ -18,6 +18,9 @@ The project uses several essential dependencies in the docker image to function 
 - **Docker & Docker Compose**: For managing containers and orchestrating services.
 - **Nginx**: To serve web files and handle HTTPS requests.
 
+## Deployed Application
+The webapp is deployed on the following URL : [https://vlbeltbsectra.hevs.ch/] (https://vlbeltbsectra.hevs.ch/) 
+
 ## Project Architecture
 
 Below is the overall architecture of the Sectra Pacs Plugin, including both the frontend and backend components:
