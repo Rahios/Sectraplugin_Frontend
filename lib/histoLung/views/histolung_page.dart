@@ -5,10 +5,10 @@ import '../views/widgets/floating_action_buttons.dart';
 import '../views/widgets/image_heatmap.dart';
 import '../views/widgets/top_panel.dart';
 
-// VIEW - Histolung Page UI
-// ROLE : User actions are captured in the UI and passed to the ViewModel
-// Implements the ViewModel listener to update the UI based on ViewModel changes
-// Is a stateless because the state is managed by the ViewModel and not the UI
+/// VIEW - Histolung Page UI
+/// ROLE : User actions are captured in the UI and passed to the ViewModel
+/// Implements the ViewModel listener to update the UI based on ViewModel changes
+/// Is a stateless because the state is managed by the ViewModel and not the UI
 class HistolungPage extends StatelessWidget {
   // Constructor with key - To identify the widget uniquely in the widget tree
   const HistolungPage({super.key});

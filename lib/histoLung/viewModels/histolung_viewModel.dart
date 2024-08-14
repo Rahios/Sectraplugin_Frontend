@@ -2,16 +2,16 @@ import 'package:flutter/foundation.dart';
 import '../models/histolung_model.dart';
 import '../controllers/histolung_controller.dart';
 
-// VIEW MODEL
-// This class is responsible for managing the state of the Histolung model.
-// Extends ChangeNotifier to notify the listeners when the state changes.
-// It interacts with the HistolungController to fetch the data and update the state.
-// It notifies the listeners when the state changes.
-// ROLE : - State Management of the Histolung model
-//        - Fetch data from the controller
-//        - Update the state of the model via the controller
-//        - Notify the listeners in the UI when the state changes
-// Implement the business logic of the application
+/// VIEW MODEL
+/// This class is responsible for managing the state of the Histolung model.
+/// Extends ChangeNotifier to notify the listeners when the state changes.
+/// It interacts with the HistolungController to fetch the data and update the state.
+/// It notifies the listeners when the state changes.
+/// ROLE : - State Management of the Histolung model
+///        - Fetch data from the controller
+///        - Update the state of the model via the controller
+///        - Notify the listeners in the UI when the state changes
+/// Implement the business logic of the application
 class HistolungViewModel extends ChangeNotifier
 {
   // Controller to be used by the view model

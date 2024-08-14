@@ -2,11 +2,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/histolung_model.dart';
 
-// CONTROLLER
-// This class is responsible for interacting with the backend API
-// It sends requests to the API and processes the responses to be used by the UI
-// ROLE : Communicate with the API and process the responses to update the model
-// Implement the logic to interact with the API
+/// CONTROLLER
+/// This class is responsible for interacting with the backend API
+/// It sends requests to the API and processes the responses to be used by the UI
+/// ROLE : Communicate with the API and process the responses to update the model
+/// Implement the logic to interact with the API
 class HistolungController
 {
   final String baseUrl = 'https://vlbeltbsectra.hevs.ch/api/Histolung';
